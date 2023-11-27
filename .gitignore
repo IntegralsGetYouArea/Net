@@ -6,5 +6,6 @@
 sourcemap.json
 /node_modules
 /out
+/out/*.ts
 /include
 *.tsbuildinfo
