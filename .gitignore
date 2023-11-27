@@ -4,3 +4,7 @@
 /build
 .vscode
 sourcemap.json
+/node_modules
+/out
+/include
+*.tsbuildinfo
