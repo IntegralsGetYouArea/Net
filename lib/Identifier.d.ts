@@ -1,2 +1,2 @@
-export type Identifier<T> = string;
+export type Identifier = string;
 

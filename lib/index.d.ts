@@ -11,9 +11,9 @@ export interface Configuration {
 	Ratelimit?: number,
 }
 
-export interface QueryResult<T> extends IterableFunction<LuaTuple<[number?, (Player | string)?, string?, ...any[]]>> {}
+export interface QueryResult extends IterableFunction<LuaTuple<[number?, (Player | string)?, string?, ...any[]]>> {}
 
-export class QueryResult<T> {
+export class QueryResult {
     private _snapshot: Array<{
         identifier: string;
         sender: Player | "NET_SERVER";
@@ -22,8 +22,8 @@ export class QueryResult<T> {
     private _identifiers: Array<string>;
     private _senders: Array<Player | "NET_SERVER">;
 
-    public from (this: QueryResult<T>, ...players: LuaTuple<[Player | "NET_SERVER"]>): QueryResult<T>;
-    public of (this: QueryResult<T>, ...identifiers: LuaTuple<[string]>): QueryResult<T>;
+    public from (this: QueryResult, ...players: LuaTuple<[Player | "NET_SERVER"]>): QueryResult;
+    public of (this: QueryResult, ...identifiers: LuaTuple<[string]>): QueryResult;
 
     private constructor(
         snapshot: Array<{
@@ -36,18 +36,18 @@ export class QueryResult<T> {
     )
 }
 
-export interface Net<T> extends IterableFunction<QueryResult<T>> {}
+export interface Net extends IterableFunction<QueryResult> {}
 
-export class Net<T extends "NET_SERVER" | undefined> {
+export class Net {
     public Server: "NET_SERVER";
 
-    private _bridge: Bridge<T>;
+    private _bridge: Bridge;
     private _configuration: Configuration;
 
-    public query (this: Net<T>, ...strings: LuaTuple<[string]>): QueryResult<T>;
-    public send<U extends any[]> (this: Net<T>, identifier: Identifier<U>, ...data: LuaTuple<[T]>): SendRequest<U>;
-    public start (this: Net<T>, loop: any): undefined;
+    public query (this: Net, ...strings: LuaTuple<[string]>): QueryResult;
+    public send (this: Net, identifier: string, ...data: LuaTuple<[any]>): SendRequest;
+    public start (this: Net, loop: any): undefined;
 
-    public identifier<U> (this: Net<T>, index: string): Identifier<U>;
+    public identifier (this: Net, index: string): Identifier;
     constructor(configuration: Configuration);
 }

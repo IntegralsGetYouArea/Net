@@ -1,32 +1,56 @@
 
 type Recipient = Player[] | Player | "NET_SERVER"
 
-type Packet<T> = {
-    identifier: string,
-    recipient: Recipient,
-    data: Array<T>,
+type Packet = {
+    data: Array<any>;
+    identifier: string;
+    recipient: "NET_SERVER" | Player | Array<Player>;
 }
 
-type OutgoingQueue<T> = Packet<T>[]
+type Payload = Array<any>
+
+type OutgoingQueue = Array<Packet>
 
 // IMPORTANT: Remember, on the server side T must be set to `any` as we cannot be 100% certain
 // if data coming in from the client is actually the data it says it is
-type IncomingQueue<T> = Array<{
+type IncomingQueue = Array<{
     identifier: string,
     sender: Player | "NET_SERVER",
-    data: Array<T>,
+    data: Array<any>,
 }>
 
-export interface Bridge<T> {}
+export interface Bridge {}
 
-export class Bridge<T> {
+export class Bridge {
     public remote: RemoteEvent;
 
     private _configuration: Map<string, any>;
-    private _outgoingQueue: OutgoingQueue<T>;
-    private _incomingQueue: IncomingQueue<T>;
+    private _outgoingQueue: OutgoingQueue;
+    private _incomingQueue: IncomingQueue;
+
+    private _addPacketToPayload(this: Bridge, payload: Map<string, any>, packet: Packet): undefined;
+	private _updateClientPayload: (
+		this: Bridge,
+		clientPackages: Map<Player, Map<string, any>>,
+		player: Player,
+		packet: Packet,
+	) => undefined;
+	private _processOutgoingQueue (self: Bridge): undefined;
+	private _processIncoming (self: Bridge, sender: Player | "NET_SERVER", payload: Payload): undefined;
+
+	public step (this: Bridge): undefined;
+	public snapshot (this: Bridge): IncomingQueue;
+	public send (this: Bridge, recipient: Recipient, identifier: string, ...data: LuaTuple<[any]>): SendRequest | undefined;
+
+    public constructor(configuration?: Map<string, any>);
 }
 
-export class SendRequest<T extends any[]> {
-    
+export interface SendRequest {}
+
+export class SendRequest {
+    private _outgoingQueue: OutgoingQueue;
+	private _bridge: Bridge;
+	private _position: number;
+
+	public to (this: SendRequest, recipient: Recipient): undefined;
 }
