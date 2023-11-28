@@ -40,7 +40,7 @@ export class Bridge {
 
 	public step (this: Bridge): undefined;
 	public snapshot (this: Bridge): IncomingQueue;
-	public send (this: Bridge, recipient: Recipient, identifier: string, data: LuaTuple<any[]>): SendRequest | undefined;
+	public send (this: Bridge, recipient: Recipient, identifier: string, ...data: any[]): SendRequest | undefined;
 
     public constructor(configuration?: Map<string, any>);
 }

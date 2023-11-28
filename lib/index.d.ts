@@ -44,8 +44,8 @@ export class Net {
     private _bridge: Bridge;
     private _configuration: Configuration;
 
-    public query (this: Net, strings: LuaTuple<string[]>): QueryResult;
-    public send (this: Net, identifier: string, data: LuaTuple<any[]>): SendRequest;
+    public query (this: Net, ...strings: string[]): QueryResult;
+    public send (this: Net, identifier: string, ...data: any[]): SendRequest;
     public start (this: Net, loop: any): undefined;
 
     public identifier (this: Net, index: string): Identifier;
