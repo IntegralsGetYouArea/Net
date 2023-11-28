@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "**[View Docs](https://yetanotherclown.github.io/Net/)**",
   "main": "lib/init.lua",
+  "typings": "lib/index.d.ts",
   "directories": {
     "doc": "docs",
     "example": "example",

@@ -28,13 +28,13 @@ export class Bridge {
     private _outgoingQueue: OutgoingQueue;
     private _incomingQueue: IncomingQueue;
 
-    private _addPacketToPayload(this: Bridge, payload: Map<string, any>, packet: Packet): undefined;
-	private _updateClientPayload: (
+    private _addPacketToPayload (this: Bridge, payload: Map<string, any>, packet: Packet): undefined;
+	private _updateClientPayload (
 		this: Bridge,
 		clientPackages: Map<Player, Map<string, any>>,
 		player: Player,
 		packet: Packet,
-	) => undefined;
+	) : undefined;
 	private _processOutgoingQueue (self: Bridge): undefined;
 	private _processIncoming (self: Bridge, sender: Player | "NET_SERVER", payload: Payload): undefined;
 
