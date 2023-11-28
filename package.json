@@ -199,8 +199,7 @@
   "license": "ISC",
   "types": "out/index.d.ts",
   "files": [
-    "out",
-    "!**/*.tsbuildinfo"
+    "lib"
   ],
   "publishConfig": {
     "access": "public"

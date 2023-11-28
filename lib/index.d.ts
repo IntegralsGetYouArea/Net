@@ -49,5 +49,5 @@ export class Net {
     public start (this: Net, loop: any): undefined;
 
     public identifier (this: Net, index: string): Identifier;
-    constructor(configuration: Configuration);
+    constructor(configuration?: Configuration);
 }
